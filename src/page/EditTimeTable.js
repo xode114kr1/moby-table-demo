@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -31,9 +31,41 @@ const EditTimeTable = () => {
     "김태은",
     "김병건",
     "신윤호",
+    "정지호",
+    "강세진",
   ];
   const [doEdit, setDoEdit] = useState(false);
   const [schedule, setSchedule] = useState([[], [], [], [], [], [], []]);
+  const [peopleId, setPeopleId] = useState(14);
+
+  const fetchSchedule = async (id) => {
+    console.log(id);
+    try {
+      let url = `http://localhost:4000/people/${id}`;
+      let response = await fetch(url);
+      let data = await response.json();
+      setSchedule(data.schedule);
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
+  };
+
+  const patchSchedule = async () => {
+    console.log("asd");
+    try {
+      let url = `http://localhost:4000/people/${peopleId}`;
+      let response = await fetch(url, {
+        method: "PATCH",
+        schedule: schedule,
+      });
+    } catch (error) {
+      console.error("Error patching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSchedule(peopleId);
+  }, []);
 
   const times = [
     "08:00",
@@ -89,12 +121,19 @@ const EditTimeTable = () => {
 
   const clickEditButton = () => {
     setDoEdit(!doEdit);
+    patchSchedule();
   };
 
   return (
     <div className="edit-table-page-contanier">
       <div className="button-contanier">
-        <Button onClick={clickEditButton}>{doEdit ? "수정" : "저장"}</Button>
+        {allPeople[peopleId]}:{peopleId}
+        <Button
+          onClick={clickEditButton}
+          variant={doEdit ? "danger" : "primary"}
+        >
+          {doEdit ? "저장" : "수정"}
+        </Button>
         <Button onClick={clickPrintScheduleButton}>출력</Button>
       </div>
 
