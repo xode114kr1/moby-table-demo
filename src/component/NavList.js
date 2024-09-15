@@ -8,7 +8,6 @@ const NavList = () => {
   const location = useLocation();
   const goToLinkPage = (page) => {
     navigate(`${page}`);
-    console.log(location);
   };
   return (
     <div className="nav-list">

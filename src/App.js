@@ -5,6 +5,7 @@ import NavList from "./component/NavList";
 import CommonTimeTable from "./page/CommonTimeTable";
 import "./App.css";
 import { useState } from "react";
+import AllSong from "./page/AllSong";
 
 function App() {
   const [myId, setMyId] = useState("14");
@@ -15,6 +16,7 @@ function App() {
         <NavList />
         <div className="content-div">
           <Routes>
+            <Route path="/" element={<AllSong />} />
             <Route
               path="/edittimetable"
               element={<EditTimeTable myId={myId} />}

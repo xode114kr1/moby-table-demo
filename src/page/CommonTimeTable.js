@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const CommonTimeTable = () => {
+const CommonTimeTable = ({ song }) => {
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const allPeople = [
     "진정환",
@@ -94,12 +94,14 @@ const CommonTimeTable = () => {
   };
 
   useEffect(() => {
-    addCommonSchedule();
-  }, [groupMemberId]);
+    if (song) {
+      setGroupMemberId(song.participantsId);
+    }
+  }, []);
 
   useEffect(() => {
-    console.log(schedule);
-  }, [schedule]);
+    addCommonSchedule();
+  }, [groupMemberId]);
 
   return (
     <div className="edit-table-page-contanier">

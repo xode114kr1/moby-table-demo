@@ -108,3 +108,15 @@ body{
 .name-list button{
     width: 100%;
 }
+
+.all-song-page{
+    display: flex;
+    flex-direction: column;
+}
+
+.all-song-button-div{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    border-bottom: 1px solid rgb(189, 187, 187);
+}
