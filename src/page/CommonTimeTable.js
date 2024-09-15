@@ -1,17 +1,9 @@
-import React, { useState } from "react";
-import { Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CommonTimeTable = () => {
-  const daysOfWeek = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const allPeople = [
     "진정환",
     "진경원",
@@ -34,7 +26,7 @@ const CommonTimeTable = () => {
 
   const times = [
     "08:00",
-    "09:00",
+    "08:30",
     "09:00",
     "09:30",
     "10:00",
@@ -66,15 +58,69 @@ const CommonTimeTable = () => {
     "23:00",
     "23:30",
   ];
-
+  const [groupMemberId, setGroupMemberId] = useState([]);
   const [schedule, setSchedule] = useState([[], [], [], [], [], [], []]);
 
+  const addPeopleId = (person) => {
+    if (groupMemberId.some((member) => member === person)) {
+      let tempMember = [...groupMemberId];
+      tempMember = tempMember.filter((member) => member !== person);
+      setGroupMemberId(tempMember);
+    } else {
+      setGroupMemberId([...groupMemberId, person]);
+    }
+  };
+
+  const addCommonSchedule = async () => {
+    let tempSchedule = [[], [], [], [], [], [], []];
+
+    const fetchPromises = groupMemberId.map(async (memberId) => {
+      let url = `http://localhost:4000/people/${memberId}`;
+      let response = await fetch(url);
+      let data = await response.json();
+      let addSchedule = data.schedule;
+
+      for (let i = 0; i < addSchedule.length; i++) {
+        tempSchedule[i] = [...tempSchedule[i], ...addSchedule[i]];
+        const tempset = new Set(tempSchedule[i]);
+        tempSchedule[i] = [...tempset];
+        tempSchedule[i].sort((a, b) => a - b);
+      }
+    });
+
+    await Promise.all(fetchPromises);
+
+    setSchedule(tempSchedule);
+  };
+
+  useEffect(() => {
+    addCommonSchedule();
+  }, [groupMemberId]);
+
+  useEffect(() => {
+    console.log(schedule);
+  }, [schedule]);
+
   return (
-    <div>
-      <div></div>
+    <div className="edit-table-page-contanier">
       <div className="table-contanier">
+        <div className="name-list">
+          {allPeople.map((person, index) => (
+            <Button
+              variant={
+                groupMemberId.some((member) => member === index)
+                  ? "primary"
+                  : "light"
+              }
+              key={index}
+              onClick={() => addPeopleId(index)}
+            >
+              {person}
+            </Button>
+          ))}
+        </div>
         <Table bordered>
-          <thead>
+          <thead className="schedule-thead">
             <tr>
               <th>time</th>
               {daysOfWeek.map((day, index) => (
@@ -84,7 +130,7 @@ const CommonTimeTable = () => {
           </thead>
           <tbody>
             {times.map((time, rowId) => (
-              <tr key={rowId}>
+              <tr key={rowId} className="schedule-tr">
                 <td>{time}</td>
                 {daysOfWeek.map((day, colId) => (
                   <td

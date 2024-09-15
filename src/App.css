@@ -23,9 +23,15 @@ body{
 }
 
 .table-contanier{
+    display: flex;
+    gap: 5px;
     height: 90%;
     overflow-y: scroll;
 }
+.table-contanier::-webkit-scrollbar{
+    display: none;
+}
+
 
 .nav-list{
     width: 200px;
@@ -39,6 +45,7 @@ body{
 }
 
 .content-div{
+    padding: 5px;
     flex-grow: 1;
     border-radius: 15px;
     border: 1px solid rgb(189, 187, 187);
@@ -71,5 +78,33 @@ body{
 }
 
 .nav-list button{
+    width: 100%;
+}
+
+.schedule-table td{
+    height: 20px;
+}
+
+.schedule-tr td{
+    text-align: center;
+    padding: 3px;
+    font-size: 15px;
+    max-height: 20px;
+}
+
+.schedule-thead tr th{
+    text-align: center;
+}
+
+.name-list{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid rgb(189, 187, 187);
+    width: 100px;
+    overflow: hidden;
+}
+
+.name-list button{
     width: 100%;
 }

@@ -3,18 +3,10 @@ import { Button, Container, Table } from "react-bootstrap";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const EditTimeTable = () => {
+const EditTimeTable = ({ myId }) => {
   let tempSchedule = [];
 
-  const daysOfWeek = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const allPeople = [
     "진정환",
     "진경원",
@@ -36,10 +28,10 @@ const EditTimeTable = () => {
   ];
   const [doEdit, setDoEdit] = useState(false);
   const [schedule, setSchedule] = useState([[], [], [], [], [], [], []]);
-  const [peopleId, setPeopleId] = useState(14);
+  const [peopleId, setPeopleId] = useState(myId);
 
   const fetchSchedule = async (id) => {
-    console.log(id);
+    // console.log(id);
     try {
       let url = `http://localhost:4000/people/${id}`;
       let response = await fetch(url);
@@ -51,12 +43,15 @@ const EditTimeTable = () => {
   };
 
   const patchSchedule = async () => {
-    console.log("asd");
+    // console.log(schedule);
     try {
       let url = `http://localhost:4000/people/${peopleId}`;
       let response = await fetch(url, {
         method: "PATCH",
-        schedule: schedule,
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ schedule }),
       });
     } catch (error) {
       console.error("Error patching data:", error);
@@ -65,11 +60,11 @@ const EditTimeTable = () => {
 
   useEffect(() => {
     fetchSchedule(peopleId);
-  }, []);
+  }, [peopleId]);
 
   const times = [
     "08:00",
-    "09:00",
+    "08:30",
     "09:00",
     "09:30",
     "10:00",
@@ -116,18 +111,17 @@ const EditTimeTable = () => {
   };
 
   const clickPrintScheduleButton = () => {
-    console.log(schedule);
+    console.log(allPeople[peopleId], schedule);
   };
 
   const clickEditButton = () => {
     setDoEdit(!doEdit);
-    patchSchedule();
+    if (doEdit === true) patchSchedule();
   };
 
   return (
     <div className="edit-table-page-contanier">
       <div className="button-contanier">
-        {allPeople[peopleId]}:{peopleId}
         <Button
           onClick={clickEditButton}
           variant={doEdit ? "danger" : "primary"}
@@ -138,8 +132,19 @@ const EditTimeTable = () => {
       </div>
 
       <div className="table-contanier">
+        <div className="name-list">
+          {allPeople.map((person, index) => (
+            <Button
+              variant={allPeople[peopleId] === person ? "primary" : "light"}
+              key={index}
+              onClick={() => setPeopleId(index)}
+            >
+              {person}
+            </Button>
+          ))}
+        </div>
         <Table bordered>
-          <thead>
+          <thead className="schedule-thead">
             <tr>
               <th>time</th>
               {daysOfWeek.map((day, index) => (
@@ -149,7 +154,7 @@ const EditTimeTable = () => {
           </thead>
           <tbody>
             {times.map((time, rowId) => (
-              <tr key={rowId}>
+              <tr key={rowId} className="schedule-tr">
                 <td>{time}</td>
                 {daysOfWeek.map((day, colId) => (
                   <td
