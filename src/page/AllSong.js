@@ -5,10 +5,14 @@ const AllSong = () => {
   const [songs, setSongs] = useState(null);
 
   const fetchSong = async () => {
-    let url = "http://localhost:4000/songs";
-    let response = await fetch(url);
-    let date = await response.json();
-    console.log(date);
+    try {
+      let url = "http://localhost:4000/songs";
+      let response = await fetch(url);
+      let date = await response.json();
+      console.log(date);
+    } catch {
+      console.log("server로 부터 데이터를 입력받지 못하였습니다");
+    }
   };
 
   useEffect(() => {
