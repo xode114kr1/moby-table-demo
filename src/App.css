@@ -1,122 +1,126 @@
-html, body{
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
-.header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    border-bottom: 1px solid rgb(189, 187, 187);
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid rgb(189, 187, 187);
 }
 
-body{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.app{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.table-contanier{
-    display: flex;
-    gap: 5px;
-    height: 90%;
-    overflow-y: scroll;
+.table-contanier {
+  display: flex;
+  gap: 5px;
+  height: 90%;
+  overflow-y: scroll;
 }
-.table-contanier::-webkit-scrollbar{
-    display: none;
-}
-
-
-.nav-list{
-    width: 200px;
-    border-right: 1px solid rgb(189, 187, 187);
+.table-contanier::-webkit-scrollbar {
+  display: none;
 }
 
-.content-contanier{
-    height: 100%;
-    display: flex;
-    flex: 1;
+.nav-list {
+  width: 200px;
+  border-right: 1px solid rgb(189, 187, 187);
 }
 
-.content-div{
-    padding: 5px;
-    flex-grow: 1;
-    border-radius: 15px;
-    border: 1px solid rgb(189, 187, 187);
-    box-shadow: 7px 8px 9px 3px rgba(148, 200, 233, 0.65);
-    margin: 10px;
+.content-contanier {
+  height: 100%;
+  display: flex;
+  flex: 1;
 }
 
-.edit-table-page-contanier{
-    flex-grow: 1;
-    height: 88vh;
+.content-div {
+  padding: 5px;
+  flex-grow: 1;
+  border-radius: 15px;
+  border: 1px solid rgb(189, 187, 187);
+  box-shadow: 7px 8px 9px 3px rgba(148, 200, 233, 0.65);
+  margin: 10px;
 }
 
-.button-contanier{
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin: 5px;
+.edit-table-page-contanier {
+  flex-grow: 1;
+  height: 88vh;
 }
 
-.unClick{
-    background-color: white;
+.button-contanier {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 5px;
 }
 
-.click{
-    background-color: rgb(127, 127, 238);
+.unClick {
+  background-color: white;
 }
 
-.data-cell:hover{
-    cursor: pointer;
+.click {
+  background-color: rgb(127, 127, 238);
 }
 
-.nav-list button{
-    width: 100%;
+.data-cell:hover {
+  cursor: pointer;
 }
 
-.schedule-table td{
-    height: 20px;
+.nav-list button {
+  width: 100%;
 }
 
-.schedule-tr td{
-    text-align: center;
-    padding: 3px;
-    font-size: 15px;
-    max-height: 20px;
+.schedule-table td {
+  height: 20px;
 }
 
-.schedule-thead tr th{
-    text-align: center;
+.schedule-tr td {
+  text-align: center;
+  padding: 3px;
+  font-size: 15px;
+  max-height: 20px;
 }
 
-.name-list{
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    border: 1px solid rgb(189, 187, 187);
-    width: 100px;
-    overflow: hidden;
+.schedule-thead tr th {
+  text-align: center;
 }
 
-.name-list button{
-    width: 100%;
+.name-list {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid rgb(189, 187, 187);
+  width: 100px;
+  overflow: hidden;
 }
 
-.all-song-page{
-    display: flex;
-    flex-direction: column;
+.name-list button {
+  width: 100%;
 }
 
-.all-song-button-div{
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    border-bottom: 1px solid rgb(189, 187, 187);
+.all-song-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.all-song-button-div {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-bottom: 1px solid rgb(189, 187, 187);
+}
+
+.song-contanier-div {
+  padding: 10px;
 }
