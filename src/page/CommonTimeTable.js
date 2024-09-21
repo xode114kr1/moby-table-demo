@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useLocation } from "react-router-dom";
 
-const CommonTimeTable = ({ song }) => {
+const CommonTimeTable = () => {
+  const location = useLocation();
+  const { song } = location.state || {};
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const allPeople = [
     "진정환",
@@ -105,6 +108,7 @@ const CommonTimeTable = ({ song }) => {
 
   return (
     <div className="edit-table-page-contanier">
+      <div className="song-title-contanier-div">{song?.name}</div>
       <div className="table-contanier">
         <div className="name-list">
           {allPeople.map((person, index) => (

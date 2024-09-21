@@ -67,6 +67,7 @@ const AllSong = () => {
       setShow(false);
       await patchAddSong();
     }
+    fetchSong();
   };
 
   const patchAddSong = async () => {
@@ -154,7 +155,7 @@ const AllSong = () => {
       </div>
       <div className="song-contanier-div">
         <Row>
-          {songs.map((song) => (
+          {songs?.map((song) => (
             <SongBox song={song} />
           ))}
         </Row>

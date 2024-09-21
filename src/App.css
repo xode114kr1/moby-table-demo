@@ -117,10 +117,25 @@ body {
 .all-song-button-div {
   display: flex;
   justify-content: flex-end;
-  padding: 10px;
+  align-items: center;
+  padding: 5px;
+  height: 48px;
   border-bottom: 1px solid rgb(189, 187, 187);
 }
 
 .song-contanier-div {
   padding: 10px;
+}
+
+.song-title-contanier-div{
+  margin: 5px;
+  padding: 5px;
+  height: 38px;
+  border: 1px solid rgb(189, 187, 187);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 10px;
 }
