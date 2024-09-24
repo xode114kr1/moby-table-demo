@@ -23,6 +23,8 @@ const AddSongModal = ({ showAddModal, handleAddModalClose, fetchSong }) => {
   ];
   const [addSong, setAddSong] = useState("");
   const [addSinger, setAddSinger] = useState("");
+  const [addPerformanceDate, setAddPerformanceDate] = useState("");
+  const [addPerformance, setAddPerformance] = useState("");
   const [addparticipantsId, setAddParticipantsId] = useState([]);
   const [maxId, setMaxId] = useState(0);
 
@@ -57,6 +59,8 @@ const AddSongModal = ({ showAddModal, handleAddModalClose, fetchSong }) => {
       id: maxId + 1,
       name: addSong,
       singer: addSinger,
+      performance: addPerformance,
+      performanceDate: addPerformanceDate,
       participantsId: addparticipantsId,
     };
     try {
@@ -73,13 +77,17 @@ const AddSongModal = ({ showAddModal, handleAddModalClose, fetchSong }) => {
   };
 
   const updateMaxId = () => {
-    fetch("http://localhost:4000/songs")
-      .then((response) => response.json())
-      .then((data) => {
-        const maxId = data.reduce((max, item) => Math.max(max, item.id), 0);
-        console.log(maxId);
-        setMaxId(maxId);
-      });
+    try {
+      fetch("http://localhost:4000/songs")
+        .then((response) => response.json())
+        .then((data) => {
+          const maxId = data.reduce((max, item) => Math.max(max, item.id), 0);
+          console.log(maxId);
+          setMaxId(maxId);
+        });
+    } catch (e) {
+      console.log("데이터를 불러오는 중 오류가 발생", e);
+    }
   };
 
   useEffect(() => {
@@ -106,6 +114,23 @@ const AddSongModal = ({ showAddModal, handleAddModalClose, fetchSong }) => {
             placeholder="가수를 입력하시오"
             value={addSinger}
             onChange={(e) => setAddSinger(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>공연</Form.Label>
+          <Form.Control
+            placeholder="공연를 입력하시오"
+            value={addPerformance}
+            onChange={(e) => setAddPerformance(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>공연 날짜</Form.Label>
+          <Form.Control
+            type="date"
+            placeholder="공연 날짜를 선택하시오"
+            value={addPerformanceDate}
+            onChange={(e) => setAddPerformanceDate(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3">

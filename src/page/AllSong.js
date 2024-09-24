@@ -16,8 +16,8 @@ const AllSong = () => {
       let response = await fetch(url);
       let data = await response.json();
       setSongs(data);
-    } catch {
-      console.log("server로 부터 데이터를 입력받지 못하였습니다");
+    } catch (e) {
+      console.log("server로 부터 데이터를 입력받지 못하였습니다", e);
     }
   };
 

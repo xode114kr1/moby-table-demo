@@ -57,7 +57,20 @@ const SongBox = ({ song }) => {
             </Col>
           </Row>
         </Card.Header>
-        <Card.Body>
+        <Card.Body style={{ paddingTop: "0px" }}>
+          <Card.Text
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "10px",
+              padding: "3px",
+              fontSize: "14px",
+              marginBottom: "5px",
+            }}
+          >
+            <div>{song.performanceDate}</div>
+            <div>{song.performance}</div>
+          </Card.Text>
           <Card.Text>
             <div style={{ textAlign: "center" }}>
               {song.participantsId.map((id, index) => (
