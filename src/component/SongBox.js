@@ -1,8 +1,11 @@
-import React from "react";
-import { Button, Card, Col } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
+import React, { useState } from "react";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const SongBox = ({ song }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const goToCommonTimeTable = (song) => {
     navigate("/commontimetable", { state: { song } });
@@ -30,8 +33,31 @@ const SongBox = ({ song }) => {
   return (
     <Col xs={12} md={6} xl={3}>
       <Card>
+        <Card.Header style={{ fontSize: "20px" }}>
+          <Row>
+            <Col></Col>
+            <Col style={{ textAlign: "center" }}>{song.name}</Col>
+            <Col
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faBars}
+                onClick={() => setMenuOpen(!menuOpen)}
+              />
+              {menuOpen && (
+                <div className="song-control-menu-list">
+                  <Button variant="light">수정</Button>
+                  <Button variant="light">삭제</Button>
+                </div>
+              )}
+            </Col>
+          </Row>
+        </Card.Header>
         <Card.Body>
-          <Card.Title style={{ textAlign: "center" }}>{song.name}</Card.Title>
           <Card.Text>
             <div style={{ textAlign: "center" }}>
               {song.participantsId.map((id, index) => (

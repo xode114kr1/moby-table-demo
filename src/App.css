@@ -127,7 +127,7 @@ body {
   padding: 10px;
 }
 
-.song-title-contanier-div{
+.song-title-contanier-div {
   margin: 5px;
   padding: 5px;
   height: 38px;
@@ -138,4 +138,17 @@ body {
   font-size: 20px;
   font-weight: 500;
   border-radius: 10px;
+}
+
+.song-control-menu-list {
+  display: flex;
+  flex-direction: column;
+  right: 0px;
+  top: 46px;
+  display: flex;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  z-index: 1;
 }
