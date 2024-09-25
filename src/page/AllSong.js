@@ -6,7 +6,12 @@ import AddSongModal from "../component/AddSongModal";
 const AllSong = () => {
   const [songs, setSongs] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
+  const handleEditModalClose = () => setShowEditModal(false);
+  const handleEditModalShow = () => {
+    setShowEditModal(true);
+  };
   const handleAddModalClose = () => setShowAddModal(false);
   const handleAddModalShow = () => setShowAddModal(true);
 
@@ -40,7 +45,13 @@ const AllSong = () => {
       <div className="song-contanier-div">
         <Row>
           {songs?.map((song) => (
-            <SongBox song={song} />
+            <SongBox
+              song={song}
+              showEditModal={showEditModal}
+              handleEditModalShow={handleEditModalShow}
+              handleEditModalClose={handleEditModalClose}
+              fetchSong={fetchSong}
+            />
           ))}
         </Row>
       </div>

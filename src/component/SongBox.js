@@ -3,9 +3,16 @@ import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import React, { useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import EditSongModal from "./EditSongModal";
 
-const SongBox = ({ song }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+const SongBox = ({
+  song,
+  showEditModal,
+  handleEditModalShow,
+  handleEditModalClose,
+  fetchSong,
+}) => {
+  const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const goToCommonTimeTable = (song) => {
     navigate("/commontimetable", { state: { song } });
@@ -31,7 +38,14 @@ const SongBox = ({ song }) => {
     "강세진",
   ];
   return (
-    <Col xs={12} md={6} xl={3}>
+    <Col xs={12} md={6} xl={3} className="song-box">
+      <EditSongModal
+        song={song}
+        showEditModal={showEditModal}
+        handleEditModalClose={handleEditModalClose}
+        fetchSong={fetchSong}
+        setShowMenu={setShowMenu}
+      />
       <Card>
         <Card.Header style={{ fontSize: "20px" }}>
           <Row>
@@ -46,11 +60,13 @@ const SongBox = ({ song }) => {
             >
               <FontAwesomeIcon
                 icon={faBars}
-                onClick={() => setMenuOpen(!menuOpen)}
+                onClick={() => setShowMenu(!showMenu)}
               />
-              {menuOpen && (
+              {showMenu && (
                 <div className="song-control-menu-list">
-                  <Button variant="light">수정</Button>
+                  <Button variant="light" onClick={handleEditModalShow}>
+                    수정
+                  </Button>
                   <Button variant="light">삭제</Button>
                 </div>
               )}
