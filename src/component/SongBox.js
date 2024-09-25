@@ -12,7 +12,6 @@ const SongBox = ({
   handleEditModalClose,
   fetchSong,
 }) => {
-  const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const goToCommonTimeTable = (song) => {
     navigate("/commontimetable", { state: { song } });
@@ -38,15 +37,14 @@ const SongBox = ({
     "강세진",
   ];
   return (
-    <Col xs={12} md={6} xl={3} className="song-box">
+    <Col xs={12} md={6} xl={3}>
       <EditSongModal
         song={song}
         showEditModal={showEditModal}
         handleEditModalClose={handleEditModalClose}
         fetchSong={fetchSong}
-        setShowMenu={setShowMenu}
       />
-      <Card>
+      <Card className="song-box" onClick={handleEditModalShow}>
         <Card.Header style={{ fontSize: "20px" }}>
           <Row>
             <Col></Col>
@@ -57,20 +55,7 @@ const SongBox = ({
                 justifyContent: "flex-end",
                 alignItems: "center",
               }}
-            >
-              <FontAwesomeIcon
-                icon={faBars}
-                onClick={() => setShowMenu(!showMenu)}
-              />
-              {showMenu && (
-                <div className="song-control-menu-list">
-                  <Button variant="light" onClick={handleEditModalShow}>
-                    수정
-                  </Button>
-                  <Button variant="light">삭제</Button>
-                </div>
-              )}
-            </Col>
+            ></Col>
           </Row>
         </Card.Header>
         <Card.Body style={{ paddingTop: "0px" }}>

@@ -6,7 +6,6 @@ const EditSongModal = ({
   showEditModal,
   handleEditModalClose,
   fetchSong,
-  setShowMenu,
 }) => {
   const allPeople = [
     "진정환",
@@ -70,7 +69,6 @@ const EditSongModal = ({
     }
     fetchSong();
     handleEditModalClose();
-    setShowMenu(false);
   };
 
   return (
@@ -78,7 +76,6 @@ const EditSongModal = ({
       show={showEditModal}
       onHide={() => {
         handleEditModalClose();
-        setShowMenu(false);
       }}
     >
       <Modal.Header closeButton>
@@ -133,24 +130,34 @@ const EditSongModal = ({
           ))}
         </Form.Group>
       </Modal.Body>
-      <Modal.Footer>
-        <Button
-          variant="secondary"
-          onClick={() => {
-            handleEditModalClose();
-            setShowMenu(false);
-          }}
-        >
-          닫기
-        </Button>
-        <Button
-          variant="primary"
-          onClick={() => {
-            handleEditSong();
-          }}
-        >
-          수정하기
-        </Button>
+      <Modal.Footer
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>
+          {" "}
+          <Button variant="danger">삭제</Button>
+        </div>
+        <div style={{ display: "flex", gap: "5px" }}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              handleEditModalClose();
+            }}
+          >
+            닫기
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleEditSong();
+            }}
+          >
+            수정하기
+          </Button>
+        </div>
       </Modal.Footer>
     </Modal>
   );
